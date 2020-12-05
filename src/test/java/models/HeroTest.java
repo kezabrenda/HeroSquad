@@ -17,5 +17,10 @@ public class HeroTest {
         Hero hero = new Hero("Batman",30,'M',"utility belt","no super power");
         assertEquals("Batman", hero.getName());
     }
+    @Test
+    public void HeroInstantiatesWithAge_true() throws Exception {
+        Hero hero = new Hero("Batman",30,'M',"utility belt","no super power");
+        assertEquals(30, hero.getAge());
+    }
 
 }
