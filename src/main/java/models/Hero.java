@@ -7,17 +7,15 @@ public class Hero {
     private final LocalDateTime createdAt;
     private String name;
     private int age;
-    private Character gender;
     private String specialPower;
     private String weakness;
     private static ArrayList<Hero> instances = new ArrayList<>();
     private boolean published;
     private int id;
 
-    public Hero(String name, int age, Character gender, String specialPower, String weakness){
+    public Hero(String name, int age, String specialPower, String weakness){
         this.name = name;
         this.age = age;
-        this.gender = gender;
         this.specialPower = specialPower;
         this.weakness = weakness;
         this.published = false;
@@ -30,9 +28,6 @@ public class Hero {
         return name;
     }
     public int getAge(){ return age; }
-    public Character getGender() {
-        return gender;
-    }
     public String getSpecialPower(){
         return specialPower;
     }
@@ -62,10 +57,9 @@ public class Hero {
         return instances.get(id-1);
     }
 
-    public void update(String name, int age, Character gender, String specialPower, String weakness) {
+    public void update(String name, int age, String specialPower, String weakness) {
         this.name = name;
         this.age = age;
-        this.gender = gender;
         this.specialPower = specialPower;
         this.weakness = weakness;
     }
