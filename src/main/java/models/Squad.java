@@ -53,4 +53,13 @@ public class Squad {
         return instances.get(id-1);
     }
 
+    public void update(int maxSize, String name, String cause) {
+        this.maxSize = maxSize;
+        this.name = name;
+        this.cause = cause;
+    }
+    public void deleteSquad(){
+        instances.remove(id-1);
+    }
+
 }

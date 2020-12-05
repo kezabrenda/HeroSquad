@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -55,7 +56,7 @@ public class HeroTest {
     }
 
     @Test
-    public void AllPostsContainsAllHero_true() {
+    public void AllHeroContainsAllHeroes_true() {
         Hero hero = new Hero("Raven",20,'F',"illusions","family issues");
         Hero otherHero = new Hero ("Batman",30,'M',"utility belt","no super power");
         assertEquals(2, Hero.getAll().size());
@@ -88,10 +89,37 @@ public class HeroTest {
         Hero myHero = new Hero("Raven",20,'F',"illusions","family issues");
         assertEquals(1, myHero.getId());
     }
-
     @Test
     public void findReturnsCorrectHero() throws Exception {
         Hero hero = setupNewHero();
         assertEquals(1, Hero.findById(hero.getId()).getId());
+    }
+    /****************************************************************************************************/
+    /*@Test
+    public void updateChangesHeroDetails() throws Exception {
+        Hero hero = setupNewHero();
+        ArrayList<Hero> formerDetails = hero.getAll();
+        LocalDateTime formerDate = hero.getCreatedAt();
+        int formerId = hero.getId();
+        hero.update("Raven",20,'F',"illusions","family issues");
+        assertEquals(formerId, hero.getId());
+        assertEquals(formerDate, hero.getCreatedAt());
+        assertNotEquals(formerDetails, hero.getAll());
+    }*/
+    @Test
+    public void deleteDeletesASpecificHero() throws Exception {
+        Hero hero = setupNewHero();
+        Hero otherHero = new Hero("Raven",20,'F',"illusions","family issues");
+        hero.deleteHero();
+        assertEquals(1, Hero.getAll().size());
+        assertEquals(Hero.getAll().get(0).getId(), 2);
+    }
+    @Test
+    public void deleteAllHeroesDeletesAllHeroes() throws Exception {
+        Hero hero = setupNewHero();
+        Hero otherHero = setupNewHero();
+
+        Hero.clearAllHero();
+        assertEquals(0, Hero.getAll().size());
     }
 }
