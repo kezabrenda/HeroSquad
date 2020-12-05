@@ -27,5 +27,14 @@ public class HeroTest {
         Hero hero = new Hero("Batman",30,'M',"utility belt","no super power");
         assertEquals(java.util.Optional.of('M'), java.util.Optional.ofNullable(hero.getGender()));
     }
-
+    @Test
+    public void HeroInstantiatesWithSpecialPower_true() throws Exception {
+        Hero hero = new Hero("Batman",30,'M',"utility belt","no super power");
+        assertEquals("utility belt", hero.getSpecialPower());
+    }
+    @Test
+    public void HeroInstantiatesWithWeakness_true() throws Exception {
+        Hero hero = new Hero("Batman",30,'M',"utility belt","no super power");
+        assertEquals("no super power", hero.getWeakness());
+    }
 }
