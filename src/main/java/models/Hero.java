@@ -29,9 +29,7 @@ public class Hero {
     public String getName(){
         return name;
     }
-    public int getAge(){
-        return age;
-    }
+    public int getAge(){ return age; }
     public Character getGender() {
         return gender;
     }
