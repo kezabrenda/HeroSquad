@@ -22,5 +22,10 @@ public class HeroTest {
         Hero hero = new Hero("Batman",30,'M',"utility belt","no super power");
         assertEquals(30, hero.getAge());
     }
+    @Test
+    public void HeroInstantiatesWithGender_true() throws Exception {
+        Hero hero = new Hero("Batman",30,'M',"utility belt","no super power");
+        assertEquals(java.util.Optional.of('M'), java.util.Optional.ofNullable(hero.getGender()));
+    }
 
 }
