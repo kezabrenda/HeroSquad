@@ -1,0 +1,29 @@
+{{#partial "content"}}
+
+    {{#if editSquad}}
+        <h1>Edit this squad!</h1>
+        <form action="/squad/{{editSquad.id}}/update" method="post">
+            <label for="squadDetails">Edit this squad</label>
+            <input id="maxSize" name="maxSize" type="number" value="{{editSquad.maxSize}}">
+            <input id="name" name="name" type="text" value="{{editSquad.name}}">
+            <input id="cause" name="cause" type="text" value="{{editSquad.cause}}">
+        </form>
+
+    {{else}}
+        <h1>Add a new Squad!</h1>
+
+        <form action="/squad/new" method="post">
+            <input type="number" placeholder="Enter the max size" name="maxSize" required>
+            <input type="text" placeholder="Enter the squad name" name="name" required>
+            <input type="text" placeholder="Enter mission" name="cause" required>
+
+            <!-- <label for="content">Post Content</label>
+             <input id="content" name="content" type="text">-->
+
+    {{/if}}
+        <button type="submit" class="btn btn-default">Go!</button>
+    </form>
+
+{{/partial}}
+
+{{> layout.hbs}}
