@@ -1,21 +1,30 @@
 {{#partial "content"}}
 
     <h1>Hero list!</h1>
-
-    {{#if posts}}
-    {{#each posts }}
+    {{#if hero}}
+    {{#each hero }}
     <p>Current heroes:</p>
-    <p>{{ content }} <a href="/hero/{{id}}">read more...</a></p>
+    <p>{{ name }} <a href="/hero/{{id}}">read more...</a></p>
     {{/each}}
     {{else}}
     {{/if}}
-
     <form action="/hero/new" method="POST">
         <!--<button class="">Create Hero</button></a>
         <label for="content">Post Content</label>
         <input id="content" name="content" type="text">-->
-
         <button type="submit" class="btn btn-default"><a href="/hero-form">Add your hero</a></button>
+    </form>
+
+    <h1>Squad list!</h1>
+    {{#if squad}}
+        {{#each squad}}
+            <p>Current squads:</p>
+            <p>{{ name }} <a href="/squad/{{id}}">read more...</a></p>
+        {{/each}}
+    {{else}}
+    {{/if}}
+    <form action="/squad/new" method="POST">
+        <button type="submit" class="btn btn-default"><a href="/squad-form">Add your squad</a></button>
     </form>
 {{/partial}}
 
