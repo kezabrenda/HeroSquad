@@ -84,6 +84,21 @@ public class App {
             return new ModelAndView(model, "squad-detail.hbs"); //individual post page.
         }, new HandlebarsTemplateEngine());
 
-
+        //get: show a form to update a hero
+        get("/hero/:id/update", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfHeroToEdit = Integer.parseInt(req.params("id"));
+            Hero editHero = Hero.findById(idOfHeroToEdit);
+            model.put("editHero", editHero);
+            return new ModelAndView(model, "hero-form.hbs");
+        }, new HandlebarsTemplateEngine());
+        //get: show a form to update a squad
+        get("/squad/:id/update", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfSquadToEdit = Integer.parseInt(req.params("id"));
+            Squad editSquad = Squad.findById(idOfSquadToEdit);
+            model.put("editSquad", editSquad);
+            return new ModelAndView(model, "squad-form.hbs");
+        }, new HandlebarsTemplateEngine());
     }
 }
