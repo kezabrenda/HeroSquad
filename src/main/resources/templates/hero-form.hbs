@@ -1,28 +1,26 @@
 {{#partial "content"}}
 
-    {{#if editHero}}
-        <h1>Edit this hero!</h1>
-        <form action="/hero/{{editHero.id}}/update" method="post">
-            <label for="heroDetails">Edit this hero's details</label>
-            <input id="name" name="name" type="text" value="{{editHero.name}}">
-            <input id="age" name="age" type="number" value="{{editHero.age}}">
-            <input id="specialPower" name="specialPower" type="text" value="{{editHero.specialPower}}">
-            <input id="weakness" name="weakness" type="text" value="{{editHero.weakness}}">
-        </form>
-
-    {{else}}
         <h1>Add a new Hero!</h1>
-
         <form action="/hero/new" method="post">
-            <input type="text" placeholder="Enter your hero's name" name="name" required>
-            <input type="number" placeholder="Enter your hero's age" name="age" required>
-            <input type="text" placeholder="Enter your hero's special powers" name="specialPower" required>
-            <input type="text" placeholder="Enter your hero's weakness" name="weakness" required>
+            <div class="form-group">
+                <label for="name">Hero's name</label>
+                <input id="name" type="text" placeholder="Enter your hero's name" class="form-control" name="name" required>
+            </div>
 
-           <!-- <label for="content">Post Content</label>
-            <input id="content" name="content" type="text">-->
+            <div class="form-group">
+                <label for="age">Hero's age</label>
+                <input id="age" type="number"  placeholder="Enter your hero's age" class="form-control" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="specialPower">Hero's special powers</label>
+                <input id="specialPower" type="text" placeholder="Enter your hero's special powers" class="form-control" name="specialPower" required>
+            </div>
 
-    {{/if}}
+            <div class="form-group">
+                <label for="specialPower">Hero's weakness</label>
+                <input id="weakness" type="text" placeholder="Enter your hero's weakness" class="form-control" name="weakness" required>
+            </div>
+
         <button type="submit" class="btn btn-default">Go!</button>
     </form>
 
