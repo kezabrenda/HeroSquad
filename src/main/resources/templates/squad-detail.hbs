@@ -1,10 +1,9 @@
 {{#partial "content"}}
-    <p>Squads:</p>
-    <p>{{ squad.name }}</p>
-    <p>{{ squad.maxSize }}</p>
-    <p>{{ squad.cause }}</p>
-    <h5>Created At:</h5>
-    <p> {{ squad.createdAt }}</p>
+    <p xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><strong>Squads:</strong></p>
+    <p><strong>Squad Name:</strong> {{ squad.name }}</p>
+    <p><strong>Squad Size:</strong> {{ squad.maxSize }}</p>
+    <p><strong>Squad Mission:</strong> {{ squad.cause }}</p>
+    <h5><strong>Created At:</strong> {{ squad.createdAt }}</h5>
     <h5>Squad status:</h5>
     <p>
         {{#if squad.published }}

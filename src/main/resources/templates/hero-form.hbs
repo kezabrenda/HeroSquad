@@ -1,7 +1,7 @@
 {{#partial "content"}}
 
         <h1>Add a new Hero!</h1>
-        <form action="/hero/new" method="post">
+        <form action="/hero" href="/hero" method="post" style="background-color:beige;">
             <div class="form-group">
                 <label for="name">Hero's name</label>
                 <input id="name" type="text" placeholder="Enter your hero's name" class="form-control" name="name" required>
@@ -22,6 +22,7 @@
             </div>
 
         <button type="submit" class="btn btn-default">Go!</button>
+           <button><a href="/">Go Back</a></button>
     </form>
 
 {{/partial}}

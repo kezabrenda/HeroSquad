@@ -1,28 +1,22 @@
 {{#partial "content"}}
 
     <h1>Hero list!</h1>
-    {{#if hero}}
-    {{#each hero }}
-    <p>Current heroes:</p>
-    <p>{{ name }} <a href="/hero/{{id}}">read more...</a></p>
-    {{/each}}
-    {{else}}
-    {{/if}}
-    <form action="/hero" method="POST">
-        <button type="submit" class="btn btn-default"><a href="/hero-form">Add your hero</a></button>
-    </form>
+    {{#for}}
+        {{#each myHeroes }}
+            <p>Current heroes:</p>
+            <p>{{ name }} <a href="/hero/{{id}}">details...</a></p>
+        {{/each}}
+    {{/for}}
+
 
     <h1>Squad list!</h1>
-    {{#if squad}}
-        {{#each squad}}
+    {{#for}}
+        {{#each mySquads }}
             <p>Current squads:</p>
-            <p>{{ name }} <a href="/squad/{{id}}">read more...</a></p>
+            <p>{{ name }} <a href="/squad/{{id}}">details...</a></p>
         {{/each}}
-    {{else}}
-    {{/if}}
-    <form action="/squad/new" method="POST">
-        <button type="submit" class="btn btn-default"><a href="/squad-form">Add your squad</a></button>
-    </form>
+    {{/for}}
+
 {{/partial}}
 
 {{> layout.hbs}}

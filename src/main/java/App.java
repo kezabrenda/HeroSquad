@@ -3,24 +3,49 @@ import models.Squad;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import static spark.Spark.*;
 
 public class App {
+    static int getHerokuAssignedPort() {
+    ProcessBuilder processBuilder = new ProcessBuilder();
+    if (processBuilder.environment().get("PORT") != null) {
+        return Integer.parseInt(processBuilder.environment().get("PORT"));
+    }
+    return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
     public static void main(String[] args) {
+        port(getHerokuAssignedPort());
         staticFileLocation("/public");
 
-        //8get: show new hero form
-        get("/hero/new", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
+        get("/", (req, res) -> {
+            //just for testing - make two new objects so we have something to retrieve
+            Hero hero = new Hero("Harley",20,"cuckoo", "joker");
+            Hero otherHero = new Hero("BB",10,"bee","light");
+            Map<String, ArrayList<Hero>> model = new HashMap<>();
+            ArrayList myHeroesArrayList = Hero.getAll();
+            model.put("myHeroes", myHeroesArrayList);
             return new ModelAndView(model, "hero.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //8get: show new squad form
-        get("/squad/new", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
+        get("/", (req, res) -> {
+            //just for testing - make two new objects so we have something to retrieve
+            Squad squad = new Squad(4,"cray crew", "attack brenda");
+            Map<String, ArrayList<Squad>> model = new HashMap<>();
+            ArrayList mySquadsArrayList = Squad.getAll();
+            model.put("mySquads", mySquadsArrayList);
             return new ModelAndView(model, "squad.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/hero-form", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            return new ModelAndView(model, "hero-form.hbs");
+        }, new HandlebarsTemplateEngine());
+        get("/squad-form", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            return new ModelAndView(model, "squad-form.hbs");
         }, new HandlebarsTemplateEngine());
 
         //7post: for new hero
@@ -36,7 +61,7 @@ public class App {
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //7post: to post new squad
+//7post: to post new squad
         post("/squads/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             Integer maxSize = Integer.parseInt(req.queryParams("maxSize"));
@@ -48,45 +73,39 @@ public class App {
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //6get: ALL
-        get("/", (request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-            return new ModelAndView(model,"index.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        //5get: delete all heroes
+//5get: delete all heroes
         get("/hero/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             Hero.clearAllHero();
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //5get: delete all squads
+//5get: delete all squads
         get("/squad/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             Squad.clearAllSquad();
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //4get: show an individual hero
+//4get: show an individual hero
         get("/hero/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int idOfHeroToFind = Integer.parseInt(req.params(":id")); //pull id - must match route segment
-            Hero foundHero = Hero.findById(idOfHeroToFind); //use it to find post
-            model.put("hero", foundHero); //add it to model for template to display
-            return new ModelAndView(model, "hero-detail.hbs"); //individual post page.
+            int idOfHeroToFind = Integer.parseInt(req.params(":id"));
+            Hero foundHero = Hero.findById(idOfHeroToFind);
+            model.put("hero", foundHero);
+            return new ModelAndView(model, "hero-details.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //4get: show an individual squad
+//4get: show an individual squad
         get("/squad/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int idOfSquadToFind = Integer.parseInt(req.params(":id")); //pull id - must match route segment
-            Squad foundSquad = Squad.findById(idOfSquadToFind); //use it to find post
-            model.put("squad", foundSquad); //add it to model for template to display
-            return new ModelAndView(model, "squad-detail.hbs"); //individual post page.
+            int idOfSquadToFind = Integer.parseInt(req.params(":id"));
+            Squad foundSquad = Squad.findById(idOfSquadToFind);
+            model.put("squad", foundSquad);
+            return new ModelAndView(model, "squad-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //3get: show a form to update a hero
+//3get: show a form to update a hero
         get("/hero/:id/update", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfHeroToEdit = Integer.parseInt(req.params("id"));
@@ -94,7 +113,7 @@ public class App {
             model.put("editHero", editHero);
             return new ModelAndView(model, "hero-form.hbs");
         }, new HandlebarsTemplateEngine());
-        //3get: show a form to update a squad
+//3get: show a form to update a squad
         get("/squad/:id/update", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfSquadToEdit = Integer.parseInt(req.params("id"));
@@ -103,7 +122,7 @@ public class App {
             return new ModelAndView(model, "squad-form.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //2post: process a form to update a hero
+//2post: process a form to update a hero
         post("/hero/:id/update", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             String newName = req.queryParams("name");
@@ -115,7 +134,7 @@ public class App {
             editHero.update(newName,newAge,newSpecialPower,newWeakness);
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
-        //2post: process a form to update a squad
+//2post: process a form to update a squad
         post("/squad/:id/update", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             Integer newMaxSize = Integer.parseInt(req.queryParams("maxSize"));
@@ -127,7 +146,7 @@ public class App {
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //1get: delete an individual hero
+//1get: delete an individual hero
         get("/hero/:id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfHeroToDelete = Integer.parseInt(req.params("id"));
@@ -135,7 +154,7 @@ public class App {
             deleteHero.deleteHero();
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
-        //1get: delete an individual squad
+//1get: delete an individual squad
         get("/squad/:id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfSquadToDelete = Integer.parseInt(req.params("id"));
@@ -143,5 +162,7 @@ public class App {
             deleteSquad.deleteSquad();
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
+
+
     }
 }
