@@ -1,0 +1,24 @@
+{{#partial "content"}}
+    <section class="landing-pg">
+        <div class="land-left">
+        </div>
+        <div class="land-right">
+        </div>
+        <h2> <a class="btn" href="/squad-form" >Create Your Squad</a> <br><br> CURRENT SQUADS</h2>
+        <div class="squad">
+            {{#each squad}}
+                <div class="squad-item">
+                    <img src="/images/" alt="">
+                    <p>MaxSize: {{ maxSize }}</p>
+                    <p>Name: {{ name }} </p>
+                    <p>Cause: {{ cause }}</p>
+                    <p>Id: {{ id }}</p>
+                    <a href="new/{{id}}" class="btn">Learn More</a>
+                    <a href="/hero" class="btn">Add {{ name }} To Squad</a>
+                </div>
+
+            {{/each}}
+        </div>
+    </section>
+{{/partial}}
+{{> layout.hbs}}
