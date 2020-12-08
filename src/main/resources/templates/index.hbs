@@ -1,9 +1,8 @@
 {{#partial "content"}}
 
-    <h1>Hero list!</h1>
+    <h1>Hero list! <a href="/hero">CHECK!</a></h1>
         {{#each myHeroes }}
-            <p>Current heroes:</p>
-            <p>{{ name }} <a href="/hero/{{id}}">details...</a></p>
+            <p>Current heroes: {{ name }} <a href="/hero/{{id}}">details...</a></p>
         {{/each}}
 
 
