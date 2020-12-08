@@ -5,7 +5,7 @@
 
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
 </head>
-<body>
+<body style="background-image:url(/images/choiceB1.jpg);background-repeat:no repeat;color:white;">
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a href="#">HOME</a></li>
     <li role="presentation"><a href="/hero">HEROES</a></li>
@@ -14,22 +14,20 @@
 <div class="container">
     <!--begin main template-->
     <div class="page-header">
-       <!-- <img src="/images/choiceA.jpg" width="80%">-->
         <h1>Anyone can be A HERO. <small>Just try!</small></h1>
     </div>
 
     <div class="col-md-12">
         {{#block "content"}}
         {{/block}}
-
     </div>
 </div>
 <!--end main template-->
 {{#block "footer"}}
     <footer class="footer">
         <div class="container">
-            <p class="text-muted"><a href="/hero/delete">DELETE ALL HEROES</a></p>
-            <p class="text-muted"><a href="/squad/delete">DELETE ALL SQUADS</a></p>
+            <button class="text-muted" style="background-color:black;"><a href="/hero/delete">DELETE ALL HEROES</a></button>
+            <button class="text-muted"><a href="/squad/delete">DELETE ALL SQUADS</a></button>
         </div>
     </footer>
     </body>
