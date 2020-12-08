@@ -5,9 +5,8 @@
         <div class="land-right">
         </div>
         <h2> <a class="btn" href="/hero-form" >Create Your Hero</a> <br><br> CURRENT HEROES</h2>
-        <div class="hero" href="/hero/new">
-            {{#each hero}}
-                <div class="hero-item">
+        <div class="hero" href="/hero">
+                <div class="hero-item" href="/hero">
                     <img src="/images/" alt="">
                     <p>Name: {{ name }} </p>
                     <p>Age: {{ age }}</p>
@@ -17,8 +16,6 @@
                     <a href="new/{{id}}" class="btn">Learn More</a>
                     <a href="/squad" class="btn">Add {{ name }} To Squad</a>
                 </div>
-
-            {{/each}}
         </div>
     </section>
 {{/partial}}

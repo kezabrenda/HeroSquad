@@ -20,23 +20,31 @@ public class App {
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
 
+        //6get: show all posts
         get("/", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            ArrayList<Hero> hero = Hero.getAll();
+            model.put("hero", hero);
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/hero", (req, res) -> {
             //just for testing - make two new objects so we have something to retrieve
             Hero hero = new Hero("Harley",20,"cuckoo", "joker");
             Hero otherHero = new Hero("BB",10,"bee","light");
             Map<String, ArrayList<Hero>> model = new HashMap<>();
             ArrayList myHeroesArrayList = Hero.getAll();
             model.put("myHeroes", myHeroesArrayList);
-            return new ModelAndView(model, "hero.hbs");
+            return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/", (req, res) -> {
+        get("/squad", (req, res) -> {
             //just for testing - make two new objects so we have something to retrieve
             Squad squad = new Squad(4,"cray crew", "attack brenda");
             Map<String, ArrayList<Squad>> model = new HashMap<>();
             ArrayList mySquadsArrayList = Squad.getAll();
             model.put("mySquads", mySquadsArrayList);
-            return new ModelAndView(model, "squad.hbs");
+            return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
         get("/hero-form", (request, response) -> {
@@ -46,6 +54,19 @@ public class App {
         get("/squad-form", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             return new ModelAndView(model, "squad-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/hero", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            String name = request.queryParams("name");
+            Integer age = Integer.valueOf(request.queryParams("age"));
+            String specialPower = request.queryParams("specialPower");
+            String weakness = request.queryParams("weakness");
+            model.put("name", name);
+            model.put("age", age);
+            model.put("specialPower", specialPower);
+            model.put("weakness", weakness);
+            return new ModelAndView(model, "hero.hbs");
         }, new HandlebarsTemplateEngine());
 
         //7post: for new hero
