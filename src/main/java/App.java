@@ -70,7 +70,7 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //7post: for new hero
-        post("/hero/new", (req, res) -> {
+        post("/hero", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             String name = req.queryParams("name");
             Integer age = Integer.parseInt(req.queryParams("age"));
@@ -83,7 +83,7 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 //7post: to post new squad
-        post("/squads/new", (req, res) -> {
+        post("/squad", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             Integer maxSize = Integer.parseInt(req.queryParams("maxSize"));
             String name = req.queryParams("name");
