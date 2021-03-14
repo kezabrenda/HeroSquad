@@ -389,7 +389,7 @@ nav>ul li{
   padding: 10px;
   padding-left: 60px;
   box-shadow: -10px -10px 10px rgba(255, 255, 255, 0.068);
-  background: rgba(9, 22, 9,0.5);
+  background: rgb(0, 51, 153);
   border-radius: 5px;
 }
 .hero-item img{
@@ -488,7 +488,6 @@ position: absolute;
   outline: none;
 }
 .member-cont{
-  /* background: rgba(255, 255, 255, 0.103); */
   padding: 10px;
   border-bottom: 1px solid;
 }
