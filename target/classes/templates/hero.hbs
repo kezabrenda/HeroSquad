@@ -1,0 +1,26 @@
+{{#partial "content"}}
+    <section class="landing-pg">
+        <div class="land-left">
+        </div>
+        <div class="land-right">
+        </div>
+        <h2> <a class="btn" href="/hero-form" >Create Your Hero</a> <br><br> CURRENT HEROES</h2>
+        <div class="hero" href="/hero">
+                <div class="hero-item" href="/hero">
+                    <img src="/images/" alt="">
+                    <p>Name: {{ name }} </p>
+                    <p>Age: {{ age }}</p>
+                    <p>Special power: {{ specialPower }}</p>
+                    <p>Weakness: {{ weakness }}</p>
+                    <p>Id: {{ id }}</p>
+                    <a href="new/{{id}}" class="btn">Learn More</a>
+                    <a href="/squad" class="btn">Add {{ name }} To Squad</a>
+                </div>
+            <div class="container">
+                <button class="text-muted"><a href="/hero/delete">DELETE ALL HEROES</a></button>
+                <button class="text-muted"><a href="/squad/delete">DELETE ALL SQUADS</a></button>
+            </div>
+        </div>
+    </section>
+{{/partial}}
+{{> layout.hbs}}

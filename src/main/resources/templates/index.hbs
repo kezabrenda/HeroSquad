@@ -1,18 +1,15 @@
 {{#partial "content"}}
-
-    <h1>Hero list! <a href="/hero">CHECK!</a></h1>
-        {{#each myHeroes }}
-            <p>Current heroes: {{ name }} <a href="/hero/{{id}}">details...</a></p>
-            <p>Add heroes <a href="/hero-form">here</a></p>
-        {{/each}}
-
-
-    <h1>Squad list! <a href="/squad">CHECK!</a></h1>
-        {{#each mySquads }}
-            <p>Current squads: {{ name }} <a href="/squad/{{id}}">details...</a></p>
-            <p>Add squad <a href="/squad-form">here</a></p>
-        {{/each}}
-
+    <section class="landing-pg">
+        <div class="land-left">
+        </div>
+        <div class="land-right">
+        </div>
+        <div class="hero-img">
+        </div>
+        <div class="hero-desc">
+            <h3>Let's Make You  a Hero</h3>
+            <a href="/hero-form"><button class="hero-btn btns">Create Hero</button></a>
+        </div>
+    </section>
 {{/partial}}
-
 {{> layout.hbs}}

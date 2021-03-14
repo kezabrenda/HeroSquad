@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{#block "title"}}HERO-SQUAD{{/block}}</title>
+
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+</head>
+<body style="background-image:url(/images/choiceB1.jpg);background-repeat:no repeat;color:white;">
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#">HOME</a></li>
+    <li role="presentation"><a href="/hero">HEROES</a></li>
+    <li role="presentation"><a href="/squad">SQUADS</a></li>
+</ul>
+<div class="container">
+    <!--begin main template-->
+    <div class="page-header">
+        <h1>Anyone can be A HERO. <small>Just try!</small></h1>
+    </div>
+
+    <div class="col-md-12">
+        {{#block "content"}}
+        {{/block}}
+    </div>
+</div>
+<!--end main template-->
+{{#block "footer"}}
+    <footer class="footer">
+    </footer>
+    </body>
+    </html>
+{{/block}}

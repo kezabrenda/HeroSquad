@@ -1,0 +1,18 @@
+{{#partial "content"}}
+
+    <h1>Hero list! <a href="/hero">CHECK!</a></h1>
+        {{#each myHeroes }}
+            <p>Current heroes: {{ name }} <a href="/hero/{{id}}">details...</a></p>
+            <p>Add heroes <a href="/hero-form">here</a></p>
+        {{/each}}
+
+
+    <h1>Squad list! <a href="/squad">CHECK!</a></h1>
+        {{#each mySquads }}
+            <p>Current squads: {{ name }} <a href="/squad/{{id}}">details...</a></p>
+            <p>Add squad <a href="/squad-form">here</a></p>
+        {{/each}}
+
+{{/partial}}
+
+{{> layout.hbs}}
