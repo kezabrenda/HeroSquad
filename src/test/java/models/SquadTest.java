@@ -10,94 +10,69 @@ import static org.junit.Assert.*;
 public class SquadTest {
 
     @Test
-    public void NewSquadObjectGetsCorrectlyCreated_true() throws Exception {
-        Squad squad = new Squad(4,"The Bomb Squad","bomb alert");
-        assertEquals(true, squad instanceof Squad);
+    public void newSquad_instantiatesCorrectly_true() {
+        Squad newSquad = Squad.setUpNewSquad();
+        assertTrue(newSquad instanceof Squad);
+    }
+    @Test
+    public void newSquad_getName_String() {
+        Squad newSquad = Squad.setUpNewSquad();
+        assertEquals("Avengers",newSquad.getSquadName());
+    }
+    @Test
+    public void newSquad_getSize_Int() {
+        Squad newSquad = Squad.setUpNewSquad();
+        assertEquals(5,newSquad.getSize());
+    }
+    @Test
+    public void newSquad_getPower_String() {
+        Squad newSquad = Squad.setUpNewSquad();
+        assertEquals("Infinity Stone",newSquad.getCause());
+    }
+    @Test
+    public void newSquad_getInstances_true() {
+        Squad newSquad = Squad.setUpNewSquad();
+        Squad another = Squad.setUpNewSquad();
+        assertTrue(Squad.getInstances().contains(newSquad));
+        assertTrue(Squad.getInstances().contains(another));
+    }
+    @Test
+    public void newSquad_getSquadMembers_Array() {
+        Squad newSquad = Squad.setUpNewSquad();
+        Hero newHero = Hero.setUpNewHero();
+        Hero newHero1 = Hero.setUpNewHero1();
+        newSquad.setSquadMembers(newHero);
+        assertEquals("Marcian",newSquad.getSquadMembers().get(0).getName());
     }
 
     @Test
-    public void SquadInstantiatesWithMaxSize_true() throws Exception {
-        Squad squad = new Squad(4,"The Bomb Squad","bomb alert");
-        assertEquals(4, squad.getMaxSize());
+    public void newSquad_allTestSquadMembers_Array() {
+        Hero newHero = Hero.setUpNewHero();
+        Squad newSquad = Squad.setUpNewSquad();
+        newSquad.clearAllSquadMembers();
+        newSquad.getSquadMembers().add(newHero);
+        newSquad.getSquadMembers().add(newHero);
+        assertEquals("Marcian",newSquad.getSquadMembers().get(0).getName());
     }
     @Test
-    public void SquadInstantiatesWithName_true() throws Exception {
-        Squad squad = new Squad(4,"The Bomb Squad","bomb alert");
-        assertEquals("The Bomb Squad", squad.getName());
-    }
-    @Test
-    public void SquadInstantiatesWithCause_true() throws Exception {
-        Squad squad = new Squad(4,"The Bomb Squad","bomb alert");
-        assertEquals("bomb alert", squad.getCause());
+    public void addMember_addsMemberToSquad_Hero(){
+        Hero newHero = Hero.setUpNewHero();
+        Squad testSquad = Squad.setUpNewSquad();
+        Squad newSquad = Squad.findBySquadId(1);
+        newSquad.clearAllSquadMembers();
+        newSquad.getSquadMembers().add(newHero);
+        newSquad.getSquadMembers().add(newHero);
+        assertEquals(2,newSquad.getSquadMembers().size());
     }
 
     @Test
-    public void AllSquadAreCorrectlyReturned_true() {
-        Squad squad = new Squad(4,"The Bomb Squad","bomb alert");
-        Squad squadTwo = new Squad(8,"Super Hero Girls","fight gender discrimination");
-        assertTrue(Squad.getAll().contains(squad));
-        assertTrue(Squad.getAll().contains(squadTwo));
+    public void setNewMember_hero(){
+        Hero.clearAllHeroes();
+        Hero newHero = Hero.setUpNewHero();
+        Squad testSquad = Squad.setUpNewSquad();
+        testSquad.setSquadMembers(newHero);
+
+        assertEquals(1,testSquad.getSquadMembers().get(0).getId());
     }
 
-    @Test
-    public void AllSquadContainsAllSquads_true() {
-        Squad squad = new Squad(4,"The Bomb Squad","bomb alert");
-        Squad squadTwo = new Squad(8,"Super Hero Girls","fight gender discrimination");
-        assertEquals(2, Squad.getAll().size());
-    }
-
-    @Test
-    public void getPublished_isFalseAfterInstantiation_false() throws Exception {
-        Squad squadTwo = new Squad(8,"Super Hero Girls","fight gender discrimination");
-        assertEquals(false, squadTwo.getPublished());
-    }
-    @Test
-    public void getCreatedAt_instantiatesWithCurrentTime_today() throws Exception{
-        Squad mySquad = setupNewSquad();
-        assertEquals(LocalDateTime.now().getDayOfWeek(), mySquad.getCreatedAt().getDayOfWeek());
-    }
-    private Squad setupNewSquad() {
-        return new Squad(8,"Super Hero Girls","fight gender discrimination");
-    }
-    @Test
-    public void findReturnsCorrectSquadWhenMoreThanOneSquadsExists() throws Exception {
-        Squad squad = setupNewSquad();
-        Squad squadTwo = new Squad(8,"Super Hero Girls","fight gender discrimination");
-        assertEquals(2, Squad.findById(squadTwo.getId()).getId());
-    }
-
-    @Test
-    public void getId_squadInstantiateWithAnID_1() throws Exception{
-        Squad.clearAllSquad();  // Remember, the test will fail without this line! We need to empty leftover Posts from previous tests!
-        Squad mySquad = new Squad(8,"Super Hero Girls","fight gender discrimination");
-        assertEquals(1, mySquad.getId());
-    }
-
-    @Test
-    public void findReturnsCorrectSquad() throws Exception {
-        Squad squad = setupNewSquad();
-        assertEquals(1, Squad.findById(squad.getId()).getId());
-    }
-
-    @Test
-    public void deleteDeletesASpecificSquad() throws Exception {
-        Squad squad = setupNewSquad();
-        Squad squad1 = new Squad(8,"Super Hero Girls","fight gender discrimination");
-        squad.deleteSquad();
-        assertEquals(1, Squad.getAll().size());
-        assertEquals(Squad.getAll().get(0).getId(), 2);
-    }
-    @Test
-    public void deleteAllSquadsDeletesAllSquads() throws Exception {
-        Squad squad = setupNewSquad();
-        Squad squad1 = setupNewSquad();
-
-        Squad.clearAllSquad();
-        assertEquals(0, Squad.getAll().size());
-    }
-
-    @After
-    public void tearDown() {
-        Squad.clearAllSquad();
-    }
 }

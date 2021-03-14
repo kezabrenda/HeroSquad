@@ -10,111 +10,51 @@ import static org.junit.Assert.*;
 
 public class HeroTest {
 
-    @After
-    public void tearDown() {
-        Hero.clearAllHero(); //clear out all the hero before each test.
-    }
-                                 /****/
     @Test
-    public void NewHeroObjectGetsCorrectlyCreated_true() throws Exception {
-        Hero hero = new Hero("Raven",20,"illusions","family issues");
-        assertEquals(true, hero instanceof Hero);
-    }
-
-    @Test
-    public void HeroInstantiatesWithName_true() throws Exception {
-        Hero hero = new Hero("Batman",30,"utility belt","no super power");
-        assertEquals("Batman", hero.getName());
+    public void newHero_instantiatesCorrectly_true() {
+        Hero newHero = Hero.setUpNewHero();
+        assertTrue(newHero instanceof Hero);
     }
     @Test
-    public void HeroInstantiatesWithAge_true() throws Exception {
-        Hero hero = new Hero("Batman",30,"utility belt","no super power");
-        assertEquals(30, hero.getAge());
+    public void newHero_getName_String() {
+        Hero newHero = Hero.setUpNewHero();
+        assertEquals("Marcian",newHero.getName());
     }
     @Test
-    public void HeroInstantiatesWithSpecialPower_true() throws Exception {
-        Hero hero = new Hero("Batman",30,"utility belt","no super power");
-        assertEquals("utility belt", hero.getSpecialPower());
+    public void newHero_getAge_Int() {
+        Hero newHero = Hero.setUpNewHero();
+        assertEquals(23,newHero.getAge());
     }
     @Test
-    public void HeroInstantiatesWithWeakness_true() throws Exception {
-        Hero hero = new Hero("Batman",30,"utility belt","no super power");
-        assertEquals("no super power", hero.getWeakness());
-    }
-                             /******************************************************************************/
-    @Test
-    public void AllHeroAreCorrectlyReturned_true() {
-        Hero hero = new Hero("Raven",20,"illusions","family issues");
-        Hero otherHero = new Hero ("Batman",30,"utility belt","no super power");
-        assertTrue(Hero.getAll().contains(hero));
-        assertTrue(Hero.getAll().contains(otherHero));
-    }
-
-    @Test
-    public void AllHeroContainsAllHeroes_true() {
-        Hero hero = new Hero("Raven",20,"illusions","family issues");
-        Hero otherHero = new Hero ("Batman",30,"utility belt","no super power");
-        assertEquals(2, Hero.getAll().size());
-    }
-/********************************************************************************************/
-
-    @Test
-    public void getPublished_isFalseAfterInstantiation_false() throws Exception {
-        Hero myHero = new Hero("Raven",20,"illusions","family issues");
-        assertEquals(false, myHero.getPublished()); //should never start as published
+    public void newHero_getPower_String() {
+        Hero newHero = Hero.setUpNewHero();
+        assertEquals("flying",newHero.getPower());
     }
     @Test
-    public void getCreatedAt_instantiatesWithCurrentTime_today() throws Exception{
-        Hero myHero = setupNewHero();
-        assertEquals(LocalDateTime.now().getDayOfWeek(), myHero.getCreatedAt().getDayOfWeek());
-    }
-    private Hero setupNewHero() {
-        return new Hero("Raven",20,"illusions","family issues");
+    public void newHero_getWeakness_String() {
+        Hero newHero = Hero.setUpNewHero();
+        assertEquals("fire",newHero.getWeakness());
     }
     @Test
-    public void findReturnsCorrectHeroWhenMoreThanOneHeroesExists() throws Exception {
-        Hero hero = setupNewHero();
-        Hero otherHero = new Hero("Batman",30,"utility belt","no super power");
-        assertEquals(2, Hero.findById(otherHero.getId()).getId());
-    }
-    /************************************************************************************************/
-    @Test
-    public void getId_heroInstantiateWithAnID_1() throws Exception{
-        Hero.clearAllHero();  // Remember, the test will fail without this line! We need to empty leftover Posts from previous tests!
-        Hero myHero = new Hero("Raven",20,"illusions","family issues");
-        assertEquals(1, myHero.getId());
+    public void newHero_getAllInstances_true() {
+        Hero newHero = Hero.setUpNewHero();
+        Hero another = Hero.setUpNewHero();
+        assertTrue(Hero.getAllInstances().contains(newHero));
+        assertTrue(Hero.getAllInstances().contains(another));
     }
     @Test
-    public void findReturnsCorrectHero() throws Exception {
-        Hero hero = setupNewHero();
-        assertEquals(1, Hero.findById(hero.getId()).getId());
-    }
-    /****************************************************************************************************/
-    /*@Test
-    public void updateChangesHeroDetails() throws Exception {
-        Hero hero = setupNewHero();
-        ArrayList<Hero> formerDetails = hero.getAll();
-        LocalDateTime formerDate = hero.getCreatedAt();
-        int formerId = hero.getId();
-        hero.update("Raven",20,"illusions","family issues");
-        assertEquals(formerId, hero.getId());
-        assertEquals(formerDate, hero.getCreatedAt());
-        assertNotEquals(formerDetails, hero.getAll());
-    }*/
-    @Test
-    public void deleteDeletesASpecificHero() throws Exception {
-        Hero hero = setupNewHero();
-        Hero otherHero = new Hero("Raven",20,"illusions","family issues");
-        hero.deleteHero();
-        assertEquals(1, Hero.getAll().size());
-        assertEquals(Hero.getAll().get(0).getId(), 2);
+    public void newHero_getId_Int() {
+        Hero.clearAllHeroes();
+        Hero newHero = Hero.setUpNewHero();
+        Hero another = Hero.setUpNewHero();
+        Hero another1 = Hero.setUpNewHero();
+        assertEquals(3,another1.getId());
     }
     @Test
-    public void deleteAllHeroesDeletesAllHeroes() throws Exception {
-        Hero hero = setupNewHero();
-        Hero otherHero = setupNewHero();
-
-        Hero.clearAllHero();
-        assertEquals(0, Hero.getAll().size());
+    public void newHero_findById_id() {
+        Hero.clearAllHeroes();
+        Hero newHero = Hero.setUpNewHero();
+        Hero another = Hero.setUpNewHero();
+        assertEquals(2,Hero.findById(another.getId()).getId());
     }
 }

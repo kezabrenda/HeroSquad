@@ -30,13 +30,13 @@ public class Hero {
     public static Hero findById(int id) {return instances.get(id-1);}
 
     public static Hero setUpNewHero(){
-        return new Hero("Atemba",23,"flying","fire");
+        return new Hero("Marcian",23,"flying","fire");
     }
     public static Hero setUpNewHero1(){
-        return new Hero("Albert",30,"Night Vision","Light");
+        return new Hero("NightWing",30,"Night Vision","Light");
     }
     public static Hero setUpNewHero2(){
-        return new Hero("Jane",20,"Night Vision","Light");
+        return new Hero("SuperMan",20,"Super Man","Kryptonite");
     }
 
 }
